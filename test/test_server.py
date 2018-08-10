@@ -6,7 +6,9 @@ sys.path.append('src/')
 
 import server
 
+
 class TestCheckData(unittest.TestCase):
+
     def test_positive_integer_number(self):
         assert server.check_data('17') == 17
 
@@ -28,7 +30,9 @@ class TestCheckData(unittest.TestCase):
     def test_empty_string(self):
         assert server.check_data('') is None
 
+
 class TestIsPrime(unittest.TestCase):
+
     def test_prime_number(self):
         assert server.is_prime(17)
 
@@ -59,11 +63,13 @@ class TestIsPrime(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             server.is_prime('aaa')
 
+
 class TestGetPossiblePrimes(unittest.TestCase):
+
     def test_positive_integer_number(self):
         primes = server.get_possible_primes(17)
         assert primes == [2, 3, 5, 7]
-    
+
     def test_positive_float_number(self):
         with self.assertRaises(ValueError) as context:
             server.get_possible_primes(17.17)
@@ -88,6 +94,7 @@ class TestGetPossiblePrimes(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             server.get_possible_primes('aaa')
 
+
 class TestFactorize(unittest.TestCase):
 
     def test_prime_number(self):
@@ -97,7 +104,7 @@ class TestFactorize(unittest.TestCase):
     def test_positive_integer(self):
         primes = server.factorize(24)
         assert primes == (2, 2, 2, 3)
-    
+
     def test_positive_float_number(self):
         with self.assertRaises(ValueError) as context:
             server.factorize(17.17)
@@ -122,11 +129,12 @@ class TestFactorize(unittest.TestCase):
         with self.assertRaises(ValueError) as context:
             server.factorize('aaa')
 
+
 class TestIsPositiveInteger(unittest.TestCase):
 
     def test_positive_integer_number(self):
         assert server.is_positive_integer(17)
-    
+
     def test_positive_float_number(self):
         assert not server.is_positive_integer(17.17)
 
@@ -147,7 +155,7 @@ class TestValidateNumber(unittest.TestCase):
 
     def test_positive_integer(self):
         server.validate_number(17)
-    
+
     def test_positive_float_number(self):
         with self.assertRaises(ValueError) as context:
             server.validate_number(17.17)
