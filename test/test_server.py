@@ -64,35 +64,38 @@ class TestIsPrime(unittest.TestCase):
             server.is_prime('aaa')
 
 
-class TestGetPossiblePrimes(unittest.TestCase):
+class TestGetNextPrime(unittest.TestCase):
 
     def test_positive_integer_number(self):
-        primes = server.get_possible_primes(17)
-        assert primes == [2, 3, 5, 7]
+        assert server.get_next_prime(17) == 19
+
+    def test_even_number(self):
+        with self.assertRaises(ValueError) as context:
+            server.get_next_prime(4)
 
     def test_positive_float_number(self):
         with self.assertRaises(ValueError) as context:
-            server.get_possible_primes(17.17)
+            server.get_next_prime(17.17)
 
     def test_zero(self):
         with self.assertRaises(ValueError) as context:
-            server.get_possible_primes(0)
+            server.get_next_prime(0)
 
     def test_one(self):
         with self.assertRaises(ValueError) as context:
-            server.get_possible_primes(1)
+            server.get_next_prime(1)
 
     def test_negative_integer_number(self):
         with self.assertRaises(ValueError) as context:
-            server.get_possible_primes(-17)
+            server.get_next_prime(-17)
 
     def test_negative_float_number(self):
         with self.assertRaises(ValueError) as context:
-            server.get_possible_primes(-17.17)
+            server.get_next_prime(-17.17)
 
     def test_string(self):
         with self.assertRaises(ValueError) as context:
-            server.get_possible_primes('aaa')
+            server.get_next_prime('aaa')
 
 
 class TestFactorize(unittest.TestCase):

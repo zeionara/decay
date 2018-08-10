@@ -60,16 +60,15 @@ def is_prime(number):
     return True
 
 
-# returns prime numbers which are less than or equal to half of the given value
-def get_possible_primes(number):
-    result = []
+# get least prime number which is more than a given one
+def get_next_prime(number):
+    if not is_prime(number):
+        raise ValueError
 
-    validate_number(number)
-
-    for i in range(2, number // 2 + 1):
-        if is_prime(i):
-            result.append(i)
-    return result
+    while True:
+        number += 1
+        if is_prime(number):
+            return number
 
 
 # returns tuple of integers as a result of factorization
@@ -78,20 +77,14 @@ def factorize(number):
     validate_number(number)
 
     factors = []
-    current_prime_index = 0
-    primes = get_possible_primes(number)
+    current_prime = 2
 
-    while number > 1 and current_prime_index < len(primes):
-        current_prime = primes[current_prime_index]
+    while number > 1:
         if number % current_prime == 0:
             number = number // current_prime
             factors.append(current_prime)
-            current_prime_index = 0
-            continue
-        current_prime_index += 1
-
-    if number > 1:
-        factors.append(number)
+        else:
+            current_prime = get_next_prime(current_prime)
 
     return tuple(factors)
 

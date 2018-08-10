@@ -12,8 +12,8 @@ SERVER_ADDRESS = (SERVER_HOST, SERVER_PORT)
 
 EXIT_CODE = 'exit'
 
-HELLO_MSG = """Welcome to the factorization program! In order to exit
-    you need to write '""" + EXIT_CODE + "' at any moment"
+HELLO_MSG = "Welcome to the factorization program! In order to exit " +\
+    "you need to write '" + EXIT_CODE + "' at any moment"
 GOOD_BYE_MSG = 'Have a good luck! See you soon!'
 TYPE_NUMBER_MSG = 'Please, type your number for factor and press <Enter>: '
 INVALID_NUMBER_MSG = 'It is an invalid number, we need a positive integer one'
@@ -35,6 +35,8 @@ def main():
             message = input(PREAMBLE + ' ' + TYPE_NUMBER_MSG)
             if message == EXIT_CODE:
                 break
+            elif not message:
+                continue
             # send number to the server
             client_socket.send(message.encode('utf-8'))
             # get result from server and unpickle it
