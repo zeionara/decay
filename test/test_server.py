@@ -2,6 +2,7 @@ import unittest
 
 import sys
 sys.path.append('../src/')
+sys.path.append('src/')
 
 import server
 
@@ -140,6 +141,36 @@ class TestIsPositiveInteger(unittest.TestCase):
 
     def test_string(self):
         assert not server.is_positive_integer('aaa')
+
+
+class TestValidateNumber(unittest.TestCase):
+
+    def test_positive_integer(self):
+        server.validate_number(17)
+    
+    def test_positive_float_number(self):
+        with self.assertRaises(ValueError) as context:
+            server.validate_number(17.17)
+
+    def test_zero(self):
+        with self.assertRaises(ValueError) as context:
+            server.validate_number(0)
+
+    def test_one(self):
+        with self.assertRaises(ValueError) as context:
+            server.validate_number(1)
+
+    def test_negative_integer_number(self):
+        with self.assertRaises(ValueError) as context:
+            server.validate_number(-17)
+
+    def test_negative_float_number(self):
+        with self.assertRaises(ValueError) as context:
+            server.validate_number(-17.17)
+
+    def test_string(self):
+        with self.assertRaises(ValueError) as context:
+            server.validate_number('aaa')
 
 if __name__ == '__main__':
     unittest.main()
