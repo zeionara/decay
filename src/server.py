@@ -73,7 +73,6 @@ def get_next_prime(number):
 
 # returns tuple of integers as a result of factorization
 def factorize(number):
-
     validate_number(number)
 
     factors = []
@@ -105,7 +104,10 @@ def main():
             print(PREAMBLE, GOT_CONNECTION_MSG % client_address)
             # start to handle requests
             while True:
-                data = connection.recv(REQUEST_SIZE)
+                data = connection.recv(REQUEST_SIZE) 
+                if not data:
+                    print(PREAMBLE, NO_MORE_DATA_MSG % client_address)
+                    break
                 print(PREAMBLE, RECEIVED_MSG % data.decode('utf-8'))
                 # check number and factorize it if it is a valid one
                 number = check_data(data)
@@ -114,9 +116,6 @@ def main():
                     result = factorize(number)
                 # return result and try to handle next request
                 connection.send(pickle.dumps(result))
-                if not data:
-                    print(PREAMBLE, NO_MORE_DATA_MSG % client_address)
-                    break
         finally:
             connection.close()
 
